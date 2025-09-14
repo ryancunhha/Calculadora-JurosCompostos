@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Juros Compostos Online</title>
+    <link rel="shortcut icon" href="https://img.icons8.com/ios/50/graph--v1.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <script src="./script.js" defer></script>
+</head>
+
+<body>
+    <main>
+        <h1>Simulador de Juros Compostos</h1>
+        <form>
+            <div>
+                <div class="info">
+                    <h2>Valor inicial</h2>
+                    <div class="inputs">
+                        <label for="valor-inicial">R$</label>
+                        <input id="valor-inicial" type="text" placeholder="00,00" value="100" required>
+                    </div>
+                </div>
+                <div class="info">
+                    <h2>Taxa de juros</h2>
+                    <div class="inputs">
+                        <label for="juros">%</label>
+                        <input id="juros" type="text" placeholder="12" value="12" required>
+                        <select id="tipo-juros">
+                            <option value="anual">Anual</option>
+                            <option value="mensal">Mensal</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="info">
+                    <h2>Valor mensal</h2>
+                    <div class="inputs">
+                        <label for="aporte-mensal">R$</label>
+                        <input id="aporte-mensal" type="text" inputmode="decimal" placeholder="00,00" value="">
+                    </div>
+                </div>
+                <div class="info">
+                    <h2>Período</h2>
+                    <div class="inputs">
+                        <label for="periodo">⏳</label>
+                        <input id="periodo" type="text" placeholder="1" value="1" required>
+                        <select id="tipo-periodo">
+                            <option value="anual">Anual</option>
+                            <option value="mensal">Mensal</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="opção">
+                <button type="submit">Calcular</button>
+                <button id="limpar">Limpar</button>
+            </div>
+        </form>
+
+        <section>
+            <div class="tabela-de-resutados">
+                <h3>Resultado</h3>
+                <div class="resultado-simples">
+                    <div class="Valor-Final">
+                        <h3>Valor total final</h3>
+                        <p>R$ <span></span></p>
+                    </div>
+                    <div class="total-investido">
+                        <h3>Valor total investido</h3>
+                        <p>R$ <span></span></p>
+                    </div>
+                    <div class="total-juros">
+                        <h3>Total em juros</h3>
+                        <p>R$ <span></span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tabela-meses-section">
+            <h3>Tabela mês a mês</h3>
+            <p class="descricao-tabela">
+                A tabela mostra, para cada mês, o valor do aporte, os juros gerados e o saldo acumulado.
+                Use esta tabela para acompanhar como seu investimento cresce ao longo do tempo.
+            </p>
+            <div id="tabela-meses"></div>
+        </section>
+
+        <section>
+            <div class="detalhes">
+                <h1>Juros Compostos de Forma Simples</h1>
+                <p>Juros compostos são os "juros sobre juros". Diferente dos juros simples, que são calculados sempre
+                    sobre o valor inicial, os juros compostos são calculados sobre o valor total do momento, incluindo
+                    os juros que já foram acumulados. Isso faz com que o valor cresça de forma mais acelerada, como uma
+                    "bola de neve".</p>
+
+                <h2>Fórmula</h2>
+                <div class="formula-box">
+                    <p>A fórmula para calcular o valor final (<strong>M</strong>, montante) é:</p>
+                    <p style="text-align: center; font-size: 1.5em; font-weight: bold;">M = C (1 + i)<sup>t</sup></p>
+                    <ul>
+                        <li><strong>M:</strong> Montante (o valor final que você terá, incluindo o valor inicial mais os
+                            juros)</li>
+                        <li><strong>C:</strong> Capital (o valor inicial que você investiu ou pegou emprestado)</li>
+                        <li><strong>i:</strong> Taxa de juros (o valor em decimal, por exemplo, se a taxa for 5%, use
+                            0,05)</li>
+                        <li><strong>t:</strong> Tempo (o período em que o dinheiro ficou aplicado)</li>
+                    </ul>
+                </div>
+
+                <h2>Como Calcular</h2>
+                <p>Para fazer o cálculo, siga estes passos:</p>
+                <ol>
+                    <li><strong>Ajuste a taxa de juros (i):</strong> A taxa deve estar em formato decimal. Para isso,
+                        basta dividir o valor por 100.
+                        <p><em>Exemplo: Uma taxa de 12% ao ano se torna 12 / 100 = 0,12.</em></p>
+                    </li>
+                    <li><strong>Ajuste o tempo (t):</strong> A unidade de tempo deve ser a mesma da taxa de juros.
+                        <p><em>Exemplo: Se a taxa é anual, o tempo deve ser em anos. Se a taxa é mensal, o tempo deve
+                                ser em meses.</em></p>
+                    </li>
+                    <li><strong>Calcule o montante (M):</strong> Use a fórmula com os valores ajustados.</li>
+                </ol>
+
+                <div class="example">
+                    <h3>Exemplo prático</h3>
+                    <p>Imagine que você investiu <strong>R$ 1.000,00</strong> com uma taxa de juros compostos de
+                        <strong>1% ao mês</strong>, durante <strong>3 meses</strong>.
+                    </p>
+                    <ul>
+                        <li>C = R$ 1.000</li>
+                        <li>i = 1% = 0,01</li>
+                        <li>t = 3 meses</li>
+                    </ul>
+                    <p>M = 1000 (1 + 0,01)³</p>
+                    <p>M = 1000 (1,01)³</p>
+                    <p>M = 1000 × 1,030301</p>
+                    <p><strong>M = R$ 1.030,30</strong></p>
+                    <p>No final de 3 meses, o valor total será de <strong>R$ 1.030,30</strong>.</p>
+                </div>
+            </div>
+
+            <div class="detalhes">
+                <h1>O Poder dos Juros Compostos</h1>
+                <p>Você já ouviu a frase "juros sobre juros"? Essa é a essência dos <strong>juros compostos</strong>,
+                    uma força poderosa que pode tanto construir seu patrimônio quanto aumentar suas dívidas. Imagine-o
+                    como uma bola de neve: ela começa pequena, mas à medida que rola, acumula mais neve e cresce cada
+                    vez mais rápido.</p>
+
+                ---
+
+                <h2>O Que São Juros Compostos?</h2>
+                <p>Ao contrário dos juros simples, que são calculados apenas sobre o valor inicial, os juros compostos
+                    são calculados sobre o montante total. Isso significa que, a cada período (mês, ano, etc.), os juros
+                    são somados ao seu capital, e o cálculo seguinte já leva em conta esse novo valor. É essa
+                    característica que gera um crescimento exponencial, ou seja, um crescimento que se acelera com o
+                    tempo.</p>
+
+                <div class="box">
+                    <p><strong>Fórmula:</strong> M = C (1 + i)<sup>t</sup></p>
+                    <ul>
+                        <li><strong>M</strong>: Montante final</li>
+                        <li><strong>C</strong>: Capital inicial</li>
+                        <li><strong>i</strong>: Taxa de juros</li>
+                        <li><strong>t</strong>: Tempo</li>
+                    </ul>
+                </div>
+
+                ---
+
+                <h2>Juros Compostos vs. Juros Simples</h2>
+                <p>Para entender melhor o impacto, vamos comparar os dois tipos de juros com um exemplo simples. Imagine
+                    um investimento de <strong>R$ 1.000</strong> com uma taxa de <strong>10% ao ano</strong> por
+                    <strong>3 anos</strong>.
+                </p>
+
+                <div class="comparison">
+                    <div class="simple">
+                        <h3>Juros Simples</h3>
+                        <p>O juro é sempre o mesmo. Após 3 anos, o ganho é R$ 300 (3 x 100).</p>
+                        <ul>
+                            <li><strong>Ano 1:</strong> R$ 1.000 + R$ 100 = R$ 1.100</li>
+                            <li><strong>Ano 2:</strong> R$ 1.100 + R$ 100 = R$ 1.200</li>
+                            <li><strong>Ano 3:</strong> R$ 1.200 + R$ 100 = R$ 1.300</li>
+                        </ul>
+                    </div>
+                    <div class="compound">
+                        <h3>Juros Compostos</h3>
+                        <p>O juro é calculado sobre o total acumulado. O ganho é de R$ 331.</p>
+                        <ul>
+                            <li><strong>Ano 1:</strong> R$ 1.000 + R$ 100 = R$ 1.100</li>
+                            <li><strong>Ano 2:</strong> R$ 1.100 + R$ 110 = R$ 1.210</li>
+                            <li><strong>Ano 3:</strong> R$ 1.210 + R$ 121 = R$ 1.331</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p>Apesar da diferença ser pequena no curto prazo, ela se torna gigantesca ao longo do tempo. É por isso
+                    que os juros compostos são essenciais para quem pensa no longo prazo.</p>
+
+                ---
+
+                <h2>Onde os Juros Compostos Atuam?</h2>
+                <p>O efeito dos juros compostos pode trabalhar a seu favor ou contra você. Tudo depende da sua posição
+                    na transação.</p>
+
+                <ul>
+                    <li>
+                        <p><strong>A seu favor (Investimentos):</strong> Ao investir em produtos como CDBs, Tesouro
+                            Direto ou fundos, você usa os juros compostos para fazer seu dinheiro crescer. O rendimento
+                            de cada período é somado ao seu capital, e no próximo período, você já ganha juros sobre uma
+                            quantia maior. Isso acelera a construção do seu patrimônio.</p>
+                    </li>
+                    <li>
+                        <p><strong>Contra você (Dívidas):</strong> Em empréstimos, financiamentos e, principalmente, no
+                            cartão de crédito, os juros compostos agem como uma bola de neve negativa. A cada mês, os
+                            juros são calculados sobre o valor que você deve, e se você não pagar, essa dívida cresce de
+                            forma assustadora e rápida.</p>
+                    </li>
+                </ul>
+
+                ---
+
+                <blockquote>
+                    "Os juros compostos são a oitava maravilha do mundo. Aquele que o entende, ganha. Aquele que não o
+                    entende, paga."<br>
+                    - Albert Einstein
+                </blockquote>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><a href="privacidade.html">Política de Privacidade</a></p>
+    </footer>
+</body>
+
+</html>
